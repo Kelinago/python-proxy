@@ -1,4 +1,3 @@
-
 from flask import Flask, Response, request as flask_request
 from urllib.parse import urljoin
 
@@ -20,10 +19,6 @@ def generic_proxy(path: str):
     request_headers = filter_headers(dict(flask_request.headers.items()))
     target_url = urljoin(BASE_URL, path)
 
-    request_headers['host'] = proxy_host
-    if 'origin' in request_headers:
-        request_headers['origin'] = proxy_host
-
     if 'referer' in request_headers:
         request_headers['referer'] = urljoin(BASE_URL, path)
 
@@ -36,13 +31,12 @@ def generic_proxy(path: str):
                 params=flask_request.args.to_dict(),
                 cookies=flask_request.cookies.to_dict(),
                 json=flask_request.get_json(silent=True) or {},
-                allow_redirects=False
+                allow_redirects=True
             )
-    except requests.RequestException as e:
+    except requests.RequestException:
         return Response(f"Unable to retrieve content from {target_url}", status=503)
 
     response_headers = filter_headers(response.headers)
-
     response_content_type = response_headers.get('content-type', '')
     content_encoding = response_headers.get('content-encoding', 'identity')
 

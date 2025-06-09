@@ -43,11 +43,21 @@ def modify_response_text(text: str) -> str:
     modify_handler = WordLengthMarkerHandler()
     return modify_handler.handle(text)
 
+_hop_by_hop_headers = (
+    'connection',
+    'keep-alive',
+    'proxy-authenticate',
+    'proxy-authorization',
+    'te',
+    'trailers',
+    'transfer-encoding',
+    'upgrade',
+    'host',
+)
 
 def filter_headers(headers):
-    hop_by_hop_headers = ('connection', 'keep-alive', 'proxy-authenticate', 'proxy-authorization', 'te', 'trailers', 'transfer-encoding', 'upgrade')
     return {
-        k.lower(): v 
+        k.lower(): v
         for k, v in headers.items()
-        if k.lower() not in hop_by_hop_headers
+        if k.lower() not in _hop_by_hop_headers
     }
