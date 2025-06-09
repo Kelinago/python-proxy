@@ -11,7 +11,7 @@ cd src
 flask run
 ```
 
-By default, the proxy listens on `localhost:8080`. You can change the host and port using command-line arguments:
+By default, the app is running on `localhost:5000`. You can change the host and port using command-line arguments:
 
 ```bash
 flask run --host 0.0.0.0 --port 8888
