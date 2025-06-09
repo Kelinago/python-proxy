@@ -3,7 +3,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from utils import filter_headers, encode_content, modify_response_html, modify_response_text
+from proxy.utils import filter_headers, encode_content, modify_response_html, modify_response_text
 
 
 app = Flask('ProxyApp', static_url_path='/flask_static')

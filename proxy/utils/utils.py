@@ -2,7 +2,7 @@ from io import BytesIO
 from bs4 import BeautifulSoup
 import gzip
 import zlib
-from handlers import WordLengthMarkerHandler
+from proxy.handlers import WordLengthMarkerHandler
 
 
 def encode_content(text, content_encoding, text_encoding='utf-8'):
